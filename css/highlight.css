@@ -21,8 +21,7 @@
   font-size: 16px; }
 
 article pre, article code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
-  border: none; }
+  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace; }
 
 article code {
   background: white;
@@ -32,7 +31,8 @@ article code {
 article pre code {
   background: none;
   text-shadow: none;
-  padding: 0; }
+  padding: 0;
+  border: none; }
 
 article .highlight pre {
   border: none;
