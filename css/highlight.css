@@ -21,7 +21,8 @@
   font-size: 16px; }
 
 article pre, article code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace; }
+  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  border: none; }
 
 article code {
   background: white;
