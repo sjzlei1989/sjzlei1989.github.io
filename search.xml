@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title>Typescript生成随机数</title>
+      <link href="/2018/07/18/typescript-random-number/"/>
+      <url>/2018/07/18/typescript-random-number/</url>
+      <content type="html"><![CDATA[<p>直接上代码，注释里写的挺清楚的了。</p><p>其中Math.floar(num)方法会返回一个小于等于传入值num的整数。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取一个范围内的随机数</span></span><br><span class="line"><span class="comment"> * @param min 最小值(包括)</span></span><br><span class="line"><span class="comment"> * @param max 最大值(不包括)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> getRandomInteger(min: <span class="built_in">number</span>, max: <span class="built_in">number</span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(min == max) &#123;</span><br><span class="line">        <span class="keyword">return</span> min;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(min &gt; max) &#123;</span><br><span class="line">        <span class="keyword">return</span> Util.getRandomInteger(max, min);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> range = max - min;</span><br><span class="line">    <span class="keyword">let</span> rand = <span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> (min + <span class="built_in">Math</span>.floor(rand * range));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      <categories>
+          
+          <category> typescript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ts </tag>
+            
+            <tag> typescript </tag>
+            
+            <tag> random </tag>
+            
+            <tag> 随机数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>C++ 11中的lambda表达式解析</title>
       <link href="/2018/06/20/cpp11-lambda/"/>
       <url>/2018/06/20/cpp11-lambda/</url>
