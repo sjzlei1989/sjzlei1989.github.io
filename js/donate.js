@@ -48,7 +48,7 @@ jQuery(document).ready(function() {
 			MainBox.css('background-image', 'url(' + QR + ')');
 		}
 		$('#DonateText,#donateBox,#github').addClass('blur');
-		QRBox.fadeIn(300, function(argument) {
+		QRBox.fadeIn(100, function(argument) {
 			MainBox.addClass('showQR');
 		});
 	}
@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
 	MainBox.click(function(event) {
 		MainBox.removeClass('showQR').addClass('hideQR');
 		setTimeout(function(a) {
-			QRBox.fadeOut(300, function(argument) {
+			QRBox.fadeOut(100, function(argument) {
 				MainBox.removeClass('hideQR');
 			});
 			$('#DonateText,#donateBox,#github').removeClass('blur');
