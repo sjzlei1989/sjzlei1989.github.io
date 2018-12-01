@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title>安卓修改ntp服务器</title>
+      <link href="/2018/12/01/android-sync-time/"/>
+      <url>/2018/12/01/android-sync-time/</url>
+      <content type="html"><![CDATA[<p>昨天更新了最新的AEX6.0 20181129-0837版本, 发现时间一直是错的. 网络同步时间和网络同步时区都是打开的, 而且时区也是正确的.</p><p>最奇怪的是只要一重启时间就会变成23:42.</p><p>从play上下载了clocksync也不能同步时间.<br><a id="more"></a></p><p>后来经一个群友提醒发现可以使用adb设置ntp服务器, 于是抱着试一试的态度搜索了一下.<br>找到了一个命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global ntp_server &lt;new-ntp-server&gt;</span><br></pre></td></tr></table></figure></p><p>既然有put那么应该对应的还有一个get, 于是运行了一下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings get global ntp_server</span><br></pre></td></tr></table></figure></p><p>果然返回了null, 这就是说明ntp server是空的, 所以不能同步网络时间</p><p><img src="android-sync-time/get.png" alt="get"></p><p>然后搜索到阿里云的ntp服务器地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">time1.aliyun.com</span><br><span class="line">time2.aliyun.com</span><br><span class="line">time3.aliyun.com</span><br><span class="line">time4.aliyun.com</span><br><span class="line">time5.aliyun.com</span><br><span class="line">time6.aliyun.com</span><br><span class="line">time7.aliyun.com</span><br></pre></td></tr></table></figure></p><p>随便挑选其中一个<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global ntp_server time6.aliyun.com</span><br></pre></td></tr></table></figure></p><p>执行成功不会有任何提示, 可以再次执行上边的get命令看一下</p><p><img src="android-sync-time/put.png" alt="put"></p><p>可以看到返回了刚才设置的地址, 说明设置成功了. 重启一下手机, 时间能够正常同步了.</p>]]></content>
+      
+      <categories>
+          
+          <category> android </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> npt server </tag>
+            
+            <tag> sync time </tag>
+            
+            <tag> net time </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>2018-10-20</title>
       <link href="/2018/10/20/2018-10-20/"/>
       <url>/2018/10/20/2018-10-20/</url>
