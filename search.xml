@@ -3,6 +3,62 @@
   
     
     <entry>
+      <title>Typescript判断一个二维数组中是否包含一个一维数组</title>
+      <link href="/2018/12/27/ts-array-in-array/"/>
+      <url>/2018/12/27/ts-array-in-array/</url>
+      <content type="html"><![CDATA[<p>项目需要判断一个二维数组中是否包含一个一维数组<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">2</span>,<span class="number">0</span>],[<span class="number">3</span>,<span class="number">0</span>],[<span class="number">4</span>,<span class="number">0</span>],[<span class="number">4</span>,<span class="number">1</span>],[<span class="number">4</span>,<span class="number">2</span>],[<span class="number">4</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">4</span>]];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">1</span>,<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p><p>因为以前用C#, 所以首先想到的是contains方法, 没想到ts的数组没有这个方法.<br><a id="more"></a><br>后来使用indexOf方法, 如果包含指定元素则返回索引值, 不包含则返回-1. 但是试了一下发现一直返回-1<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.indexOf(b);</span><br><span class="line">a.indexOf([<span class="number">1</span>,<span class="number">0</span>]);</span><br><span class="line">a.indexOf(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">0</span>));</span><br></pre></td></tr></table></figure></p><p>无奈求助于Google, 找到segmentfault上的一个回答才明白是怎么回事. <a href="https://segmentfault.com/q/1010000005826627/" target="_blank" rel="noopener">链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对象的数组并不是不能使用 indexOf ，来判断对象在数组的位置。</span><br><span class="line">arr.indexOf(&#123;name:&quot;Alex&quot;&#125;) 只是你上面的写法 是让数组 去判断一个 新创建的对象，</span><br><span class="line">所以会得到-1</span><br></pre></td></tr></table></figure></p><p>于是自己动手写了一个小函数来实现这个功能<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 一个二维数组中是否包含一个一维数组</span></span><br><span class="line"><span class="comment">* @param array </span></span><br><span class="line"><span class="comment">* @param element </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">static</span> arrayHasElement(array: <span class="built_in">any</span>[][], element: <span class="built_in">any</span>[]): <span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> arr of array) &#123;</span><br><span class="line">        <span class="comment">//如果长度不同则肯定不同, 直接进入下一个循环</span></span><br><span class="line">        <span class="keyword">if</span>(arr.length != element.length) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">//长度相同的话遍历两个数组中的元素判断是否相等</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> index <span class="keyword">in</span> element) &#123;</span><br><span class="line">            <span class="comment">//如果两个元素相等, 并且索引值已经是最后一个, 则认为这两个数组相等</span></span><br><span class="line">            <span class="keyword">if</span>(arr[index] == element[index]) &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">parseInt</span>(index) == element.length - <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果两个元素不等, 跳出for循环</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      <categories>
+          
+          <category> typescript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ts </tag>
+            
+            <tag> js </tag>
+            
+            <tag> javascript </tag>
+            
+            <tag> typescript </tag>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>从源码编译AEX(z2_row)</title>
+      <link href="/2018/12/04/build-aex-for-z2-row-from-source/"/>
+      <url>/2018/12/04/build-aex-for-z2-row-from-source/</url>
+      <content type="html"><![CDATA[]]></content>
+      
+      <categories>
+          
+          <category> android </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> anroid rom </tag>
+            
+            <tag> build </tag>
+            
+            <tag> compile aex </tag>
+            
+            <tag> zuk z2 pro </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>安卓修改ntp服务器</title>
       <link href="/2018/12/01/android-sync-time/"/>
       <url>/2018/12/01/android-sync-time/</url>
